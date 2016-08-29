@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "me-ventures",
-  "license": "LGPL-3.0"
+  "license": "LGPL-3.0",
+  "dependencies": {
+    "config": "^1.21.0",
+    "express": "^4.14.0",
+    "relation-provider": "^1.0.0"
+  }
 }

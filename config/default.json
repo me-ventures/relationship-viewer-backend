@@ -1,0 +1,4 @@
+{
+  "port": 3000,
+  "kubernetes-master": "http://localhost:8001"
+}

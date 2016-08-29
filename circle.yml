@@ -1,0 +1,18 @@
+machine:
+  node:
+    version: 6.3
+  services:
+    - docker
+test:
+  override:
+    - echo "test"
+deployment:
+  prod:
+    branch: master
+    commands:
+      - docker build -t $EXTERNAL_REGISTRY_ENDPOINT/relationship-viewer-backend:$CIRCLE_SHA1 .
+      - echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+      - sudo /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - sudo /opt/google-cloud-sdk/bin/gcloud config set project $GCLOUD_PROJECT
+      - sudo /opt/google-cloud-sdk/bin/gcloud docker push $EXTERNAL_REGISTRY_ENDPOINT/relationship-viewer-backend:$CIRCLE_SHA1
+      - curl -X POST --data "{\"name\":\"$EXTERNAL_REGISTRY_ENDPOINT/relationship-viewer-backend\",\"tag\":\"$CIRCLE_SHA1\"}" --header "Content-Type:application/json" http://deployment.me-ventures.com/api/v1/image-update
