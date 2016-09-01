@@ -11,6 +11,6 @@
   "dependencies": {
     "config": "^1.21.0",
     "express": "^4.14.0",
-    "relation-provider": "^1.1.2"
+    "relation-provider": "^1.1.3"
   }
 }

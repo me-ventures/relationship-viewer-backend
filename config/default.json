@@ -1,6 +1,7 @@
 {
   "port": 3000,
   "kubernetes-master": "https://kubernetes",
+  "authenticationType": "token",
   "caFile": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
   "tokenFile": "/var/run/secrets/kubernetes.io/serviceaccount/token"
 }

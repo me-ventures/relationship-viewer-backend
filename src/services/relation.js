@@ -7,13 +7,23 @@ var fs = require('fs');
 var config = require("config");
 var relationProvider = require('relation-provider');
 
+var auth = {
+    type: "none"
+};
+
+switch( config.get('authenticationType') ){
+    case 'token':
+        auth = {
+            type: "token",
+            token: fs.readFileSync(config.get('tokenFile'))
+        };
+        break;
+}
+
 relationProvider.setLocationProvider("kubernetes", {
     master: config.get('kubernetes-master'),
     caFile: config.get('caFile'),
-    auth: {
-        type: "token",
-        token: fs.readFileSync(config.get('tokenFile'))
-    }
+    auth: auth
 });
 
 var relations = relationProvider.getRelations();
