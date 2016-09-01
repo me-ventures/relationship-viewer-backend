@@ -18,6 +18,11 @@ relationProvider.setLocationProvider("kubernetes", {
 
 var relations = relationProvider.getRelations();
 
+setInterval(function(){
+    relations = relationProvider.getRelations();
+}, 300000);
+
+
 /**
  * Return all the relations in the system
  */
